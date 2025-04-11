@@ -18,32 +18,32 @@ class _MapScreenState extends State<MapScreen> {
         tappedPoints.clear();
         markers.clear();
         polylines.clear();
-      }
+      } else {
+        tappedPoints.add(point);
 
-      tappedPoints.add(point);
-
-      markers.add(
-        Marker(
-          markerId: MarkerId(point.toString()),
-          position: point,
-          infoWindow: InfoWindow(
-            title: tappedPoints.length == 1 ? 'Start Point' : 'End Point',
-          ),
-          icon: BitmapDescriptor.defaultMarkerWithHue(tappedPoints.length == 1
-              ? BitmapDescriptor.hueGreen
-              : BitmapDescriptor.hueRed),
-        ),
-      );
-
-      if (tappedPoints.length == 2) {
-        polylines.add(
-          Polyline(
-            polylineId: PolylineId('route'),
-            points: tappedPoints,
-            color: Colors.purple,
-            width: 5,
+        markers.add(
+          Marker(
+            markerId: MarkerId(point.toString()),
+            position: point,
+            infoWindow: InfoWindow(
+              title: tappedPoints.length == 1 ? 'Start Point' : 'End Point',
+            ),
+            icon: BitmapDescriptor.defaultMarkerWithHue(tappedPoints.length == 1
+                ? BitmapDescriptor.hueGreen
+                : BitmapDescriptor.hueRed),
           ),
         );
+
+        if (tappedPoints.length == 2) {
+          polylines.add(
+            Polyline(
+              polylineId: PolylineId('route'),
+              points: tappedPoints,
+              color: Colors.purple,
+              width: 5,
+            ),
+          );
+        }
       }
     });
   }
